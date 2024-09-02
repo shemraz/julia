@@ -20,7 +20,7 @@
 <details>
 <summary>🌻 Latte</summary>
 <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/latte.webp"/>
-/details>
+</details>
 <details>
 <summary>🪴 Frappé</summary>
 <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/frappe.webp"/>
