@@ -42,13 +42,14 @@ include("../src/Catppuccin.jl")
     end
 
     @testset "flavors constant" begin
-        @test isa(Catppuccin.flavors, NamedTuple)
-        @test haskey(Catppuccin.flavors, :latte)
-        @test haskey(Catppuccin.flavors, :frappe)
-        @test haskey(Catppuccin.flavors, :macchiato)
-        @test haskey(Catppuccin.flavors, :mocha)
+        result = Catppuccin.flavors()
+        @test isa(result, NamedTuple)
+        @test haskey(result, :latte)
+        @test haskey(result, :frappe)
+        @test haskey(result, :macchiato)
+        @test haskey(result, :mocha)
         
         # Test a specific color from the palette
-        @test isa(Catppuccin.flavors.latte.colors.rosewater.rgb, RGB)
+        @test isa(result.latte.colors.rosewater.rgb, RGB)
     end
 end

@@ -6,6 +6,9 @@ module Catppuccin
     function get_json(url::String)
     # Fetch JSON data from a given URL
         r = HTTP.request("GET", url)
+        if r.status != 200
+            error("Failed to fetch palette: HTTP $(r.status)")
+        end
         js = String(r.body)
         return JSON.parse(js)
     end
@@ -24,8 +27,11 @@ module Catppuccin
         return nt(flavors)
     end
 
+    function flavors()
     # Fetch and transform the Catppuccin color palette
-    const flavors::NamedTuple = transform_to_named_tuple(get_json("https://raw.githubusercontent.com/catppuccin/palette/main/palette.json")) 
+        url = "https://raw.githubusercontent.com/catppuccin/palette/main/palette.json"
+        transform_to_named_tuple(get_json(url))
+    end
 
     export flavors
 end
