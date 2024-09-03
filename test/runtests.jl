@@ -4,15 +4,14 @@ using Colors
 include("../src/Catppuccin.jl")
 
 @testset "Catppuccin" begin
-    @testset "get_json" begin
-        # Test with a known JSON endpoint
-        test_url = "https://jsonplaceholder.typicode.com/todos/1"
-        result = Catppuccin.get_json(test_url)
+    @testset "read_json" begin
+        # Test with default path to `palette.json`
+        result = Catppuccin.read_json(Catppuccin.DEFAULT_PALETTE_PATH)
         @test isa(result, Dict)
-        @test haskey(result, "userId")
-        @test haskey(result, "id")
-        @test haskey(result, "title")
-        @test haskey(result, "completed")
+        @test haskey(result, "latte")
+        @test haskey(result, "frappe")
+        @test haskey(result, "macchiato")
+        @test haskey(result, "mocha")
     end
 
     @testset "transform_to_named_tuple" begin

@@ -18,17 +18,13 @@ To update the palette:
 
 module Catppuccin
 
-    import HTTP, JSON
+    import JSON
     using Colors
 
-    function get_json(url::String)
-    # Fetch JSON data from a given URL
-        r = HTTP.request("GET", url)
-        if r.status != 200
-            error("Failed to fetch palette: HTTP $(r.status)")
-        end
-        js = String(r.body)
-        return JSON.parse(js)
+    const DEFAULT_PALETTE_PATH = joinpath(@__DIR__, "..", "data", "palette.json")
+    function read_json(path::String)
+    # Parse contents of `palette.json`
+        return JSON.parsefile(path)
     end
 
     function transform_to_named_tuple(flavors::Dict{K, V}) where {K, V}
@@ -46,9 +42,8 @@ module Catppuccin
     end
 
     function flavors()
-    # Fetch and transform the Catppuccin color palette
-        url = "https://raw.githubusercontent.com/catppuccin/palette/main/palette.json"
-        transform_to_named_tuple(get_json(url))
+    # Parse and transform the Catppuccin color palette
+        transform_to_named_tuple(read_json(DEFAULT_PALETTE_PATH))
     end
 
     export flavors
