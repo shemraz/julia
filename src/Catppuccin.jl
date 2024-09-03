@@ -1,3 +1,21 @@
+#=
+Catppuccin.jl
+
+A Julia port of the Catppuccin color palette.
+
+The palette data is sourced from the official Catppuccin *palette* repository:
+https://github.com/catppuccin/palette
+
+Palette version: v1.2.0
+Commit hash: 3511b6aa48f213c255480ab69003e330da32da41
+Last updated: 2024-09-03
+
+To update the palette:
+1. Download the latest palette.json from the Catppuccin repository
+2. Replace the file in data/palette.json
+3. Update this comment with the new version, commit hash, and date
+=#
+
 module Catppuccin
 
     import HTTP, JSON
