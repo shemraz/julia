@@ -1,61 +1,22 @@
-# TODO: Catppuccin URL goes here
+module Catppuccin
 
-import HTTP, JSON
+    import HTTP, JSON
+    using Colors
 
-const flavors = HTTP.request("GET", "https://raw.githubusercontent.com/catppuccin/palette/main/palette.json").body |> String |> JSON.parse
+    function get_json(url::String)
+        r = HTTP.request("GET", url)
+        js = String(r.body)
+        return JSON.parse(js)
+    end
 
+    function transform_to_named_tuple(flavors::Dict{K, V}) where {K, V}
+        nt(d::Dict) = Set(keys(d)) == Set(["r", "g", "b"]) ? parse(Colorant, "rgb($(d["r"]), $(d["g"]), $(d["b"]))") : NamedTuple(Symbol(k) => nt(v) for (k, v) in d)
+        nt(v::Vector) = [nt(x) for x in v]
+        nt(v) = v
+        return nt(flavors)
+    end
 
-const _catppuccin_latte = PlotTheme(
-    Dict([
-        :bg =>            colorant"",
-        :bginside =>      colorant"",
-        :fg =>            colorant"",
-        :fgtext =>        colorant"",
-        :fgguide =>       colorant"",
-        :fglegend =>      colorant"",
-        :palette =>       colorant"",
-        :colorgradient => colorant"",
-    ])
-)
+    const flavors = transform_to_named_tuple(get_json("https://raw.githubusercontent.com/catppuccin/palette/main/palette.json")) 
 
-const _catppuccin_frappe = PlotTheme(
-    Dict([
-        :bg =>            colorant"",
-        :bginside =>      colorant"",
-        :fg =>            colorant"",
-        :fgtext =>        colorant"",
-        :fgguide =>       colorant"",
-        :fglegend =>      colorant"",
-        :palette =>       colorant"",
-        :colorgradient => colorant"",
-    ])
-)
-
-
-
-const _catppuccin_macchiato = PlotTheme(
-    Dict([
-        :bg =>            colorant"",
-        :bginside =>      colorant"",
-        :fg =>            colorant"",
-        :fgtext =>        colorant"",
-        :fgguide =>       colorant"",
-        :fglegend =>      colorant"",
-        :palette =>       colorant"",
-        :colorgradient => colorant"",
-    ])
-)
-
-const _catppuccin_mocha = PlotTheme(
-    Dict([
-        :bg =>            colorant"",
-        :bginside =>      colorant"",
-        :fg =>            colorant"",
-        :fgtext =>        colorant"",
-        :fgguide =>       colorant"",
-        :fglegend =>      colorant"",
-        :palette =>       colorant"",
-        :colorgradient => colorant"",
-    ])
-)
-
+    export flavors
+end

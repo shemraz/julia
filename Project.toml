@@ -1,0 +1,9 @@
+name = "Catppuccin"
+uuid = "eaeda435-cb1e-49dc-89ff-a91671f313ae"
+authors = ["Shem-Raz Idrees <shem.idrees@arch.ox.ac.uk>"]
+version = "0.1.0"
+
+[deps]
+Colors = "5ae59095-9a9b-59fe-a467-6f913c188581"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
